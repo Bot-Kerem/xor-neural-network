@@ -117,6 +117,36 @@ class NeuralNetwork
                 }
             }
         }
+
+        std::array<double, numOutputs> Predict(std::array<double, numInputs> input)
+        {
+            std::array<double, numOutputs> predict{};
+            for(auto& hiddenNeuron: HiddenLayer)
+            {
+                double activation = hiddenNeuron.Bias;
+                for(size_t i = 0; i < numInputs; i++)
+                {
+                    activation += input[i] * hiddenNeuron.Weights[i];
+                }
+                hiddenNeuron.Value = Sigmoid(activation);
+            }
+
+            // Compute output layer activation
+            size_t p = 0;
+            for(auto& outputNeuron: OutputLayer)
+            {
+                double activation = outputNeuron.Bias;
+                
+                for(size_t i = 0; i < numHiddenNeurons; i++)
+                {
+                    activation += outputNeuron.Value * outputNeuron.Weights[i];
+                }
+                outputNeuron.Value = Sigmoid(activation); 
+                predict[p] = outputNeuron.Value;
+                p++;
+            }
+            return predict;
+        }
 };
 
 #endif // NEURAL_NETWORK_H
