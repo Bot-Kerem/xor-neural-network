@@ -10,16 +10,15 @@ class Neuron
     public:
         std::array<double, numWeights> Weights;
         double Bias;
+        double Value;
         Neuron()
-        :   Bias{(double)rand() / (double)RAND_MAX}
+        :   Bias{(double)rand() / (double)RAND_MAX}, Value{(double)rand() / (double)RAND_MAX}
         {
             for (auto&& Weight : Weights)
             {
                 Weight = (double)rand() / (double)RAND_MAX;
             }
         }
-        
-        
 };
 
 #endif // NEURON_H
