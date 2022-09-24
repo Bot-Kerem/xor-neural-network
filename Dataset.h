@@ -12,9 +12,8 @@ class Dataset
         {
             std::array<T, InputSize> Inputs;
             std::array<T, OutputSize> Outputs;
-
         };
-        
+
         std::array<_Data, size> Data;
 
         Dataset(std::array<_Data, size> dataset)
